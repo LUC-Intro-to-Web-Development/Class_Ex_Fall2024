@@ -20,10 +20,10 @@ app.use(express.urlencoded({ extended: true }));
 
 // Routes
 app.get('/', function (req, res) {
-	console.log("Sent as a get request");
+	console.log("Coming from home page");
     var username = req.params.username;
 
-	res.render('home', { title: "Routing in Action!",  username: username})
+	res.render('home', { title: "Routing in Action with Express!!",  username: username})
 })
 
 app.get('/users/:id', function (req, res) {
@@ -32,6 +32,14 @@ app.get('/users/:id', function (req, res) {
     var username = req.params.username;
 	console.log("Sent as a get request");
 	res.render('home', { title: "Routing in Action!", user_id : id})
+})
+
+app.get('/movies/:movieid', function (req, res) {
+	//Getting id parameter
+	var id = req.params.movieid;
+    var username = req.params.username;
+	
+	res.render('contact', { movie_id : id})
 })
 
 app.get('/contact', function (req, res) {
