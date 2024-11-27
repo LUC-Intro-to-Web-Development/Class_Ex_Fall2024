@@ -47,6 +47,20 @@ app.get('/contact', function (req, res) {
 	res.render( 'contact', {title : "Contact Page"})
  })
 
+ app.get('/api', function (req, res) {
+	const MOCK_API_URL = "https://603a806df1d6aa0017a10c48.mockapi.io/users";
+	try{
+		const response = axios.get(MOCK_API_URL);
+		res.json({
+			success: true,
+			data: response.data,
+		});
+	}catch(error){
+
+	}
+	//res.render( 'contact', {title : "Contact Page"})
+ })
+
  app.post('/submit', function (req, res) {
 	//Getting body parameters
 	var data = req.body;
