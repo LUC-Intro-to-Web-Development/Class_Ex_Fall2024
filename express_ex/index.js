@@ -1,4 +1,5 @@
 const express = require('express')
+const axios = require('axios');
 const app = express()
 const port = 3000
 
@@ -34,6 +35,18 @@ app.get('/users/:id', function (req, res) {
 	res.render('home', { title: "Routing in Action!", user_id : id})
 })
 
+app.get('/users', async function (req, res) {
+	const MOCK_API_URL = "https://603a806df1d6aa0017a10c48.mockapi.io/users";
+	try{
+		const response = await axios.get(MOCK_API_URL);
+		console.log(response);
+		res.render('users', {users: response.data})
+		
+	}catch(error){
+		console.log("Something went wrong with Request!");
+	}
+})
+
 app.get('/movies/:movieid', function (req, res) {
 	//Getting id parameter
 	var id = req.params.movieid;
@@ -42,21 +55,36 @@ app.get('/movies/:movieid', function (req, res) {
 	res.render('contact', { movie_id : id})
 })
 
+app.get('/theatre_info', async function (req, res) {
+	const MOCK_API_URL = "https://603a806df1d6aa0017a10c48.mockapi.io/theatre";
+	try{
+		const response = await axios.get(MOCK_API_URL);
+		console.log(response);
+		res.render('users', {users: response.data})
+		
+	}catch(error){
+		console.error("Something went wrong with Request!");
+		res.status(500).send("Error Retrieving theatre data");
+	}
+})
+
 app.get('/contact', function (req, res) {
 
 	res.render( 'contact', {title : "Contact Page"})
  })
 
- app.get('/api', function (req, res) {
+ app.get('/api', async function (req, res) {
 	const MOCK_API_URL = "https://603a806df1d6aa0017a10c48.mockapi.io/users";
 	try{
-		const response = axios.get(MOCK_API_URL);
+		const response = await axios.get(MOCK_API_URL);
+		console.log(response);
 		res.json({
 			success: true,
 			data: response.data,
 		});
+		
 	}catch(error){
-
+		
 	}
 	//res.render( 'contact', {title : "Contact Page"})
  })
