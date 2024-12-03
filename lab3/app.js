@@ -35,6 +35,7 @@ app.post('/update_item', function (req, res) {
     var itemCount = req.body.item_count;
 	var itemName = req.body.item_name;
 	var itemID = req.body.item_id;
+	
 	dbOperations.updateItem(itemName, itemCount, itemID, res);
 
 })
