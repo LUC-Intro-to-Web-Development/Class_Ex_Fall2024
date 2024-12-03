@@ -24,9 +24,20 @@ app.get('/', function (req, res) {
 
 })
 
-app.post('/update', function(req, res){
-	var itemID = req.body.deleterecord;
-	dbOperations.getOneItem(itemID, res);
+app.post('/update', async function(req, res){
+
+	try{
+		var itemID = req.body.deleterecord;
+		var aRow = await dbOperations.getOneItem(itemID);
+		console.log(aRow);
+		res.render('update', {aRow})
+
+	}catch (error) {
+        console.error('Error fetching item:', error);
+        res.status(500).send('An error occurred while retrieving the item.');
+    }
+
+
 	
 });
 
@@ -36,7 +47,8 @@ app.post('/update_item', function (req, res) {
 	var itemName = req.body.item_name;
 	var itemID = req.body.item_id;
 	
-	dbOperations.updateItem(itemName, itemCount, itemID, res);
+	dbOperations.updateItem(itemName, itemCount, itemID);
+	res.redirect('/');
 
 })
 
@@ -55,7 +67,8 @@ app.post('/update_item', function (req, res) {
  app.post('/delete_item', function (req, res) {
 	//Getting body parameters
 	const { deleterecord} = req.body;
-	dbOperations.deleteItem(deleterecord, res);
+	dbOperations.deleteItem(deleterecord);
+	res.redirect('/');
 	
  })
 

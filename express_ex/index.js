@@ -36,11 +36,11 @@ app.get('/users/:id', function (req, res) {
 })
 
 app.get('/users', async function (req, res) {
-	const MOCK_API_URL = "https://603a806df1d6aa0017a10c48.mockapi.io/users";
+	const MOCK_API_URL = "https://674d1f3954e1fca9290e6eff.mockapi.io/productions";
 	try{
 		const response = await axios.get(MOCK_API_URL);
 		console.log(response);
-		res.render('users', {users: response.data})
+		res.render('users', {theatre: response.data})
 		
 	}catch(error){
 		console.log("Something went wrong with Request!");
@@ -84,7 +84,7 @@ app.get('/contact', function (req, res) {
 		});
 		
 	}catch(error){
-		
+		console.error("Something went wrong");
 	}
 	//res.render( 'contact', {title : "Contact Page"})
  })

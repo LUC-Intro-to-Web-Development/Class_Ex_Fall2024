@@ -33,9 +33,9 @@
             <!--Form to accept grocery data-->
             <h2>Update Grocery Item:</h2>
             <form action="/update_item" method="POST">
-                <input type="text"  name="item_name" value="{{row.item_name}}" class="form-control"  placeholder="Enter grocery item (ex. Cereal)" size="40"><br>
-                <input type="number"  name="item_count" value="{{row.item_count}}" class="form-control" placeholder="Enter quantity (ex. 2)" size="60"><br>
-                <button type="submit" name="item_id" class="btn btn-primary" value="{{row.itemID}}">Submit</button>
+                <input type="text"  name="item_name" value="{{aRow.item_name}}" class="form-control"  placeholder="Enter grocery item (ex. Cereal)" size="40"><br>
+                <input type="number"  name="item_count" value="{{aRow.item_count}}" class="form-control" placeholder="Enter quantity (ex. 2)" size="60"><br>
+                <button type="submit" name="item_id" class="btn btn-primary" value="{{aRow.itemID}}">Submit</button>
             </form>
 
         </div>

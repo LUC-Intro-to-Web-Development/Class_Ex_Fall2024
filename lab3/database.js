@@ -42,22 +42,30 @@ let createItem = (item_name, item_count, res) =>{
 
 //Get One Item
 
-let getOneItem = (itemID, res) => {
+let getOneItem = (itemID) => {
+
+  return new Promise((resolve, reject) => {
+
     var getOneItem = 'SELECT itemID, item_name, item_count FROM grocery_item WHERE itemID = ?';
     var params =  [itemID];
-    db.get(getOneItem, params, function(err, row){
+    db.get(getOneItem, params,function(err, row){
         if (err) {
          
-            throw err;
+            reject(err);
           }
           /*rows.forEach((row) => {
             console.log(row.item_name);
           });*/
-          console.log(row);
-
-          res.render('update', {row})
+          //console.log(row);
+          resolve(row);
+          
+          //res.render('update', {row})
 
     })
+
+  })
+
+  
 }
 
 //Display all Grocery all grocery List Items
@@ -78,7 +86,7 @@ let getAllItems = (res) => {
 }
 
 //Update item
-let updateItem = (item_name, item_count, itemID, res) => {
+let updateItem = (item_name, item_count, itemID) => {
     var updateItem = 'UPDATE grocery_item SET item_name =? , item_count=? WHERE itemID = ?';
     var params =[item_name, item_count,itemID];
 
@@ -91,14 +99,31 @@ let updateItem = (item_name, item_count, itemID, res) => {
             console.log(row.item_name);
           });*/
           console.log("Item Updated");
-          getAllItems(res);
+          
 
     })
 }
 
+let deleteItem = (recordToDelete) =>{
+    
+  var deleteGroceryItem = 'DELETE FROM grocery_item WHERE itemID = ?';
+
+  var params = [recordToDelete];
+
+db.run(deleteGroceryItem, params, function(err){
+  if (err){
+    return console.log(err.message);
+  }
+  
+
+  console.log("Grocery Item Deleted");
+  console.log(`Rows deleted ${this.changes}`);	  
+});
+
+}
 
 //Delete a Grocery List Item
-let deleteItem = (recordToDelete, res) =>{
+/*let deleteItem = (recordToDelete, res) =>{
     
     var deleteGroceryItem = 'DELETE FROM grocery_item WHERE itemID = ?';
 	
@@ -115,6 +140,6 @@ let deleteItem = (recordToDelete, res) =>{
 	});
 
     getAllItems(res);
-}
+}*/
 
 module.exports = {deleteItem, createItem, getAllItems, updateItem, getOneItem}

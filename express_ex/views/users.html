@@ -53,12 +53,26 @@
     <p>Resize the browser window to see the effect.</p>
 
     <div class="row">
-        {{#each users}}
+        {{#each theatre}}
         <div class="column">
             <div class="card">
-            <h3>{{this.name}}</h3>
-            <img src="https://picsum.photos/id/237/100/100" alt="avatar image" />
-            <p>User Id: {{this.id}}</p>
+                <h2>{{this.theatre.name}}</h2>
+                <h3>Productions:</h3>
+                <ol>
+                {{#each theatre.productions}}
+                    <p>{{this.production_name}}</p>
+
+                    <label for="cars">Select Production:</label>
+
+                    <select name="cars" id="cars">
+                        {{#each dates }}
+                        <option>{{this}}</option>
+                        {{/each}}
+                    </select>
+
+                {{/each}}
+                </ol>
+            
             </div>
         </div>
         {{/each}}
