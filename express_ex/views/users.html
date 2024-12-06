@@ -56,23 +56,31 @@
         {{#each theatre}}
         <div class="column">
             <div class="card">
-                <h2>{{this.theatre.name}}</h2>
+                <h2>{{this.theater.theaterName}}</h2>
                 <h3>Productions:</h3>
                 <ol>
-                {{#each theatre.productions}}
-                    <p>{{this.production_name}}</p>
-
+                {{#each theater.productions}}
+                    <p>{{this.productionName}}</p>
+                    <form action="/submit_selection" method="POST">
                     <label for="cars">Select Production:</label>
 
-                    <select name="cars" id="cars">
-                        {{#each dates }}
+                    <select name="peformance_selection" id="cars">
+                        {{#each performances }}
+                        <option>{{this}}</option>
+                        {{/each}}
+                    </select>
+                    <label for="seat">Select Seat:</label>
+                    <select name="peformance_date_selection" id="seat">
+                        {{#each seats }}
                         <option>{{this}}</option>
                         {{/each}}
                     </select>
 
                 {{/each}}
+                <button>Submit</button>
+                </form>
                 </ol>
-            
+                
             </div>
         </div>
         {{/each}}
